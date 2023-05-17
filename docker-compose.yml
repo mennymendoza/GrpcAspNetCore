@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  webserver:
+    image: mcr.microsoft.com/dotnet/aspnet:6.0
+    ports:
+      - 8080:8080
+    volumes:
+      - ./bin/Release/net6.0/publish:/app
+    working_dir: /app
+    entrypoint: "dotnet GrpcAspNetCore.dll"
