@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="ClientApp/**/*" />
+    <Content Remove="client-app/**/*" />
   </ItemGroup>
 
 </Project>
