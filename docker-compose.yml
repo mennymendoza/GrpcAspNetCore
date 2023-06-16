@@ -8,3 +8,6 @@ services:
       - ./bin/Release/net6.0/publish:/app
     working_dir: /app
     entrypoint: "dotnet GrpcAspNetCore.dll"
+    environment:
+      - ASPNETCORE_URLS=http://*:8080
+

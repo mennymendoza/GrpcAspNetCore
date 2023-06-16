@@ -38,3 +38,39 @@ export namespace HelloReply {
   }
 }
 
+export class ServerEventsRequest extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ServerEventsRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ServerEventsRequest): ServerEventsRequest.AsObject;
+  static serializeBinaryToWriter(message: ServerEventsRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ServerEventsRequest;
+  static deserializeBinaryFromReader(message: ServerEventsRequest, reader: jspb.BinaryReader): ServerEventsRequest;
+}
+
+export namespace ServerEventsRequest {
+  export type AsObject = {
+  }
+}
+
+export class ServerEventsMessage extends jspb.Message {
+  getMessage(): string;
+  setMessage(value: string): ServerEventsMessage;
+
+  getSeverity(): string;
+  setSeverity(value: string): ServerEventsMessage;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ServerEventsMessage.AsObject;
+  static toObject(includeInstance: boolean, msg: ServerEventsMessage): ServerEventsMessage.AsObject;
+  static serializeBinaryToWriter(message: ServerEventsMessage, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ServerEventsMessage;
+  static deserializeBinaryFromReader(message: ServerEventsMessage, reader: jspb.BinaryReader): ServerEventsMessage;
+}
+
+export namespace ServerEventsMessage {
+  export type AsObject = {
+    message: string,
+    severity: string,
+  }
+}
+
