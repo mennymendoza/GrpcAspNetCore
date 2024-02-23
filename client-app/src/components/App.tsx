@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { GreeterClient } from '../grpc-compiled/GreetServiceClientPb';
-import { HelloRequest, HelloReply, ServerEventsRequest, ServerEventsMessage } from '../grpc-compiled/greet_pb';
+
+import { HelloRequest, ServerEventsRequest } from '../grpc-compiled/greet.ts';
 import { Button, TextField } from '@mui/material';
+import {client} from '../index.tsx';
 
 export default function App(): JSX.Element {
-  let client: GreeterClient = new GreeterClient("/");
   const [username, setUsername] = useState<string>("");
   const [unaryResponse, setUnaryResponse] = useState<string>("");
   const [message, setMessage] = useState<string>("");
 
   const buttonHandler = async () => {
-    let request: HelloRequest = new HelloRequest();
-    request.setName(username);
-    let response: HelloReply = await client.sayHello(request, {});
-    let unaryResponseMessage = response.getMessage();
+    let request: HelloRequest = HelloRequest.create({
+      name: username
+    });
+    let  { response } = await client.sayHello(request);
+    let unaryResponseMessage = response.message;
     console.log(`Unary response message: ${unaryResponseMessage}`);
     setUnaryResponse(unaryResponseMessage);
   };
@@ -22,24 +23,23 @@ export default function App(): JSX.Element {
     setUsername(event.target.value);
   }
 
-  // runs on startup
-  useEffect(() => {
-    var serverEventsRequest = new ServerEventsRequest();
-    var responseStream = client.serverEvents(serverEventsRequest, {});
+  const readStream = async () => {
+    var serverEventsRequest = ServerEventsRequest.create();
+    var call = client.serverEvents(serverEventsRequest, {});
     
     console.log("Requesting stream from the backend server.");
     
-    responseStream.on("data", (response: ServerEventsMessage) => {
-      let message: string = response.getMessage() ?? "";
-      console.log(`Stream response: ${message}`);
-      setMessage(message);
-    });
+    for await (let response of call.responses) {
+      console.log("got response message: ", response);
+    }
 
     console.log("Done setting up streaming.")
+  };
 
-    return () => {
-      responseStream.cancel();
-    }
+  // runs on startup
+  useEffect(() => {
+
+    readStream();
   }, []);
 
   return (
