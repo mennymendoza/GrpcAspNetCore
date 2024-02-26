@@ -13,10 +13,6 @@ In order to deploy this application as it is, you need to install the following 
 * This allows you to build dev and prod versions of the backend gRPC ASP.NET Core server
 * I built this using .NET 6; it's advised to install the same version of the .NET SDK
 * Here's a link for installing the .NET SDK: [Installation Guide](https://learn.microsoft.com/en-us/dotnet/core/install/)
-### Installing the Protobuf compiler
-* This compiles the Typescript/Javascript client for the frontend if you want to add your own custom messages to the greet.proto file. The official documentation for this is not great, but you should be up and running with the following two steps:
-    1. Install the Protobuf compiler tool with apt: `sudo apt install -y protobuf-compiler`. You should be able to run `protoc --version` to ensure it's installed.
-    2. Install the gRPC-web plugin tool with npm using this command: `sudo npm install -g protoc-gen-grpc-web`. Ensure you have npm already installed.
 
 ## Deployment
 
