@@ -14,6 +14,9 @@ export const useMessageStream = () => {
       }
     }
     catch (err: any) {
+      if (err.code != "INTERNAL") {
+        console.log(err);
+      }
     }
   };
 
