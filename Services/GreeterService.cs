@@ -35,7 +35,7 @@ public class GreeterService : Greeter.GreeterBase
 
             ServerEventsMessage response = new ServerEventsMessage()
             {
-                Message = _streamMessages[i % 3],
+                Message = _streamMessages[i % _streamMessages.Length],
                 Severity = "info"
             };
             await responseStream.WriteAsync(response);
